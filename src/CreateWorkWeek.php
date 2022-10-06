@@ -8,11 +8,11 @@ class CreateWorkWeek
     {
         $from = new Time(9, 0);
         $to = new Time(17, 0);
-        $monday = new WorkDay(DayOfWeek::MONDAY, new WorkingHours($from, $to));
-        $tuesday = new WorkDay(DayOfWeek::MONDAY, new WorkingHours($from, $to));
-        $wednesday = new WorkDay(DayOfWeek::MONDAY, new WorkingHours($from, $to));
-        $thursday = new WorkDay(DayOfWeek::MONDAY, new WorkingHours($from, $to));
-        $friday = new WorkDay(DayOfWeek::MONDAY, new WorkingHours($from, $to));
+        $monday = new WorkDay(DayOfWeek::MONDAY, new WorkHours($from, $to));
+        $tuesday = new WorkDay(DayOfWeek::MONDAY, new WorkHours($from, $to));
+        $wednesday = new WorkDay(DayOfWeek::MONDAY, new WorkHours($from, $to));
+        $thursday = new WorkDay(DayOfWeek::MONDAY, new WorkHours($from, $to));
+        $friday = new WorkDay(DayOfWeek::MONDAY, new WorkHours($from, $to));
         $saturday = null;
         $sunday = null;
 

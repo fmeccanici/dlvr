@@ -14,11 +14,11 @@ class WorkWeek
     protected ?WorkDay $saturday;
     protected ?WorkDay $sunday;
 
-    public function __construct(?WorkDay $monday,
-                                ?WorkDay $tuesday,
-                                ?WorkDay $wednesday,
-                                ?WorkDay $thursday,
-                                ?WorkDay $friday,
+    public function __construct(?WorkDay $monday = null,
+                                ?WorkDay $tuesday = null,
+                                ?WorkDay $wednesday = null,
+                                ?WorkDay $thursday = null,
+                                ?WorkDay $friday = null,
                                 ?WorkDay $saturday = null,
                                 ?WorkDay $sunday = null)
     {

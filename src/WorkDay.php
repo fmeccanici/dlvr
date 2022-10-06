@@ -5,20 +5,25 @@ namespace Fmeccanici\Dlvr;
 class WorkDay
 {
     protected int $dayOfWeek;
-    protected WorkingHours $workingHours;
+    protected WorkHours $workHours;
 
     /**
      * @param int $dayOfWeek
-     * @param WorkingHours $workingHours
+     * @param WorkHours $workHours
      */
-    public function __construct(int $dayOfWeek, WorkingHours $workingHours)
+    public function __construct(int $dayOfWeek, WorkHours $workHours)
     {
         $this->dayOfWeek = $dayOfWeek;
-        $this->workingHours = $workingHours;
+        $this->workHours = $workHours;
     }
 
     public function dayOfWeek(): int
     {
         return $this->dayOfWeek;
+    }
+
+    public function workHours(): WorkHours
+    {
+        return $this->workHours;
     }
 }

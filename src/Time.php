@@ -2,7 +2,9 @@
 
 namespace Fmeccanici\Dlvr;
 
-class Time
+use Illuminate\Contracts\Support\Arrayable;
+
+class Time implements Arrayable
 {
     protected int $hours;
     protected int $minutes;
@@ -18,5 +20,24 @@ class Time
         $this->hours = $hours;
         $this->minutes = $minutes;
         $this->seconds = $seconds;
+    }
+
+    public function hours(): int
+    {
+        return $this->hours;
+    }
+
+    public function minutes(): int
+    {
+        return $this->minutes;
+    }
+
+    public function toArray()
+    {
+        return [
+            'hours' => $this->hours,
+            'minutes' => $this->minutes,
+            'seconds' => $this->seconds
+        ];
     }
 }

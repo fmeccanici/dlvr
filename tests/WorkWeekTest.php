@@ -6,7 +6,7 @@ use Fmeccanici\Dlvr\DayOfWeek;
 use Fmeccanici\Dlvr\Exceptions\InvalidDayOfWeekException;
 use Fmeccanici\Dlvr\Time;
 use Fmeccanici\Dlvr\WorkDay;
-use Fmeccanici\Dlvr\WorkingHours;
+use Fmeccanici\Dlvr\WorkHours;
 use Fmeccanici\Dlvr\WorkSchedule;
 use PHPUnit\Framework\TestCase;
 

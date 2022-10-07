@@ -26,4 +26,14 @@ class WorkDay
     {
         return $this->workHours;
     }
+
+    public function startOfDay(): Time
+    {
+        return $this->workHours->from();
+    }
+
+    public function endOfDay(): Time
+    {
+        return $this->workHours->to();
+    }
 }

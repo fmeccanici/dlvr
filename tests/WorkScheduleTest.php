@@ -49,4 +49,66 @@ class WorkScheduleTest extends TestCase
         // Then
         self::assertEquals($workDay, $workWeek->workDayAt($dayOfWeek));
     }
+
+    /** @test */
+    public function it_should_calculate_due_date()
+    {
+        // Given
+        $dayOfWeek = DayOfWeek::MONDAY;
+        $workWeek = CreateWorkWeek::regular();
+        $workSchedule = new WorkSchedule($workWeek);
+        $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(16)->setMinute(0);
+
+        // When
+        $dueDate = $workSchedule->dueDate($startDate, 2);
+
+        // Then
+        self::assertEquals($startDate->addDays(2)->startOfDay(), $dueDate->startOfDay());
+        self::assertEquals(9, $dueDate->hour);
+        self::assertEquals(0, $dueDate->minute);
+    }
+    
+    /** @test */
+    public function it_should_start_next_day_if_after_work_hours()
+    {
+        // Given
+        
+        // When
+        
+        // Then
+        
+    }
+    
+    /** @test */
+    public function it_should_start_same_day_if_before_work_hours()
+    {
+        // Given
+        
+        // When
+        
+        // Then
+        
+    }
+    
+    /** @test */
+    public function it_should_take_into_account_irregular_work_day()
+    {
+        // Given
+        
+        // When
+        
+        // Then
+        
+    }
+    
+    /** @test */
+    public function it_should_take_into_account_holidays()
+    {
+        // Given
+        
+        // When
+        
+        // Then
+        
+    }
 }

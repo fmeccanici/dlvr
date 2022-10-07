@@ -29,6 +29,11 @@ class WorkHours implements Arrayable
         return $this->to;
     }
 
+    public function outside(Time $time): bool
+    {
+        return $time->isAfter($this->to) && $time->isBefore($this->from);
+    }
+
     public function toArray()
     {
         return [

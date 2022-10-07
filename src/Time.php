@@ -32,6 +32,17 @@ class Time implements Arrayable
         return $this->minutes;
     }
 
+    public function isAfter(Time $other): bool
+    {
+        return $this->hours > $other->hours && $this->minutes > $other->minutes;
+
+    }
+
+    public function isBefore(Time $other): bool
+    {
+        return $this->hours < $other->hours && $this->minutes < $other->minutes;
+    }
+
     public function toArray()
     {
         return [

@@ -42,6 +42,7 @@ class WorkScheduleBuilderTest extends TestCase
             ->addRegularWorkDay(DayOfWeek::MONDAY, 9, 0, 17, 0)
             ->addDeviatingWorkHours($date, 8, 0, 15, 0)->build();
 
+
         // Then
         self::assertEquals($workHours, $workSchedule->workDay($date->year, $date->month, $date->day)->workHours());
     }

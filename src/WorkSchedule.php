@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 
 class WorkSchedule
 {
-    protected string $companyId;
     protected WorkWeek $workWeek;
     protected Collection $holidays;
     protected Collection $irregularWorkDays;
@@ -18,11 +17,6 @@ class WorkSchedule
         $this->workWeek = $workWeek;
         $this->irregularWorkDays = collect();
         $this->holidays = collect();
-    }
-
-    public function companyId(): string
-    {
-        return $this->companyId;
     }
 
     public function workWeek(): WorkWeek
@@ -62,5 +56,25 @@ class WorkSchedule
         return $this->irregularWorkDays->filter(function (IrregularWorkDay $irregularWorkDay) use ($date) {
             return $irregularWorkDay->date()->isSameDay($date);
         })->first();
+    }
+
+    public function dueDate(CarbonImmutable $startDate, int $workDays): CarbonImmutable
+    {
+        $dueDate = clone $startDate;
+
+        for ($i = 0; $i < $workDays; $i++)
+        {
+            $dueDate = $dueDate->addDay();
+        }
+
+        $workDay = $this->workWeek->workDayAt($dueDate->dayOfWeek);
+
+        return $dueDate->setHour($workDay->startOfDay()->hours())
+                ->setMinute($workDay->startOfDay()->minutes());
+    }
+
+    protected function nextWorkDay(CarbonImmutable $date): WorkDay
+    {
+
     }
 }

@@ -75,7 +75,24 @@ class WorkScheduleTest extends TestCase
         self::assertEquals(9, $dueDate->hour);
         self::assertEquals(0, $dueDate->minute);
     }
-    
+
+    /** @test */
+    public function it_should_be_due_next_monday()
+    {
+        // Given
+        $dayOfWeek = DayOfWeek::MONDAY;
+        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+        $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(10)->setMinute(0);
+
+        // When
+        $dueDate = $workSchedule->dueDate($startDate, 6);
+
+        // Then
+        self::assertEquals($startDate->addDays(8)->startOfDay(), $dueDate->startOfDay());
+        self::assertEquals(9, $dueDate->hour);
+        self::assertEquals(0, $dueDate->minute);
+    }
+
     /** @test */
     public function it_should_calculate_due_date_for_regular_work_week()
     {

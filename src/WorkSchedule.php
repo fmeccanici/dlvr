@@ -130,6 +130,9 @@ class WorkSchedule
         return ! $workDay->workHours()->inside(new Time($dateTime->hour, $dateTime->minute));
     }
 
+    /**
+     * @throws WorkScheduleOperationException
+     */
     protected function nextNthWorkDay(CarbonImmutable $start, int $n): CarbonImmutable
     {
         $nextNthWorkDay = clone $start;
@@ -155,12 +158,6 @@ class WorkSchedule
     protected function nextWorkDay(CarbonImmutable $start): CarbonImmutable
     {
         $nextWorkDay = clone $start;
-
-//        if ($this->afterWorkHours($start))
-//        {
-//            $nextWorkDay = $nextWorkDay->addDay();
-//        }
-
 
         if ($this->working($nextWorkDay))
         {

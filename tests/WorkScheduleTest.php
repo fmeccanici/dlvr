@@ -64,7 +64,7 @@ class WorkScheduleTest extends TestCase
     {
         // Given
         $dayOfWeek = DayOfWeek::MONDAY;
-        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+        $workSchedule = $this->workScheduleBuilder->addRegularWorkWeek()->build();
         $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(10)->setMinute(0);
 
         // When
@@ -81,7 +81,7 @@ class WorkScheduleTest extends TestCase
     {
         // Given
         $dayOfWeek = DayOfWeek::MONDAY;
-        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+        $workSchedule = $this->workScheduleBuilder->addRegularWorkWeek()->build();
         $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(10)->setMinute(0);
 
         // When
@@ -98,7 +98,7 @@ class WorkScheduleTest extends TestCase
     {
         // Given
         $dayOfWeek = DayOfWeek::MONDAY;
-        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+        $workSchedule = $this->workScheduleBuilder->addRegularWorkWeek()->build();
         $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(16)->setMinute(0);
 
         // When
@@ -115,7 +115,7 @@ class WorkScheduleTest extends TestCase
     {
         // Given
         $dayOfWeek = DayOfWeek::MONDAY;
-        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+        $workSchedule = $this->workScheduleBuilder->addRegularWorkWeek()->build();
         $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(17)->setMinute(1);
 
         // When
@@ -132,7 +132,7 @@ class WorkScheduleTest extends TestCase
     {
         // Given
         $dayOfWeek = DayOfWeek::MONDAY;
-        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+        $workSchedule = $this->workScheduleBuilder->addRegularWorkWeek()->build();
         $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(8)->setMinute(0);
 
         // When
@@ -151,7 +151,7 @@ class WorkScheduleTest extends TestCase
         $startDate = CarbonImmutable::now()->next(CarbonImmutable::MONDAY)->setHour(12);
 
         $irregularWorkDay = CreateWorkDay::irregular($startDate, 9, 0, 11, 0);
-        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+        $workSchedule = $this->workScheduleBuilder->addRegularWorkWeek()->build();
         $workSchedule->addIrregularWorkDay($irregularWorkDay->workHours(), $irregularWorkDay->date());
 
         // When
@@ -169,7 +169,7 @@ class WorkScheduleTest extends TestCase
         // Given
         $startDate = CarbonImmutable::now()->next(CarbonImmutable::MONDAY)->setHour(9)->setMinute(0);
 
-        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+        $workSchedule = $this->workScheduleBuilder->addRegularWorkWeek()->build();
         $workSchedule->addHoliday(CarbonImmutable::now()->next(CarbonImmutable::MONDAY));
 
         // When
@@ -187,7 +187,7 @@ class WorkScheduleTest extends TestCase
         // Given
         $startDate = CarbonImmutable::now()->next(CarbonImmutable::MONDAY)->setHour(16);
 
-        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+        $workSchedule = $this->workScheduleBuilder->addRegularWorkWeek()->build();
         $irregularWorkDay = CreateWorkDay::irregular(CarbonImmutable::now()->next(CarbonImmutable::MONDAY), 9, 0, 15, 0);
         $workSchedule->addIrregularWorkDay($irregularWorkDay->workHours(), $irregularWorkDay->date());
         $workSchedule->addHoliday(CarbonImmutable::now()->next(CarbonImmutable::TUESDAY));
@@ -206,7 +206,7 @@ class WorkScheduleTest extends TestCase
     {
         // Given
         $date = CarbonImmutable::now()->nextWeekendDay();
-        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+        $workSchedule = $this->workScheduleBuilder->addRegularWorkWeek()->build();
 
         // Then
         $this->expectException(WorkScheduleOperationException::class);
@@ -221,7 +221,7 @@ class WorkScheduleTest extends TestCase
     {
         // Given
         $date = CarbonImmutable::now()->nextWeekendDay();
-        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+        $workSchedule = $this->workScheduleBuilder->addRegularWorkWeek()->build();
 
         // Then
         $this->expectException(WorkScheduleOperationException::class);

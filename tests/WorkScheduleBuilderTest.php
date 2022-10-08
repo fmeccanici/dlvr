@@ -4,6 +4,7 @@ use Carbon\CarbonImmutable;
 use Fmeccanici\Dlvr\Builders\WorkScheduleBuilder;
 use Fmeccanici\Dlvr\DayOfWeek;
 use Fmeccanici\Dlvr\Factories\CreateWorkDay;
+use Fmeccanici\Dlvr\Factories\CreateWorkWeek;
 use Fmeccanici\Dlvr\WorkDays\Time;
 use Fmeccanici\Dlvr\WorkDays\WorkHours;
 use PHPUnit\Framework\TestCase;
@@ -45,5 +46,22 @@ class WorkScheduleBuilderTest extends TestCase
 
         // Then
         self::assertEquals($workHours, $workSchedule->workDay($date->year, $date->month, $date->day)->workHours());
+    }
+
+    /** @test */
+    public function it_should_add_regular_work_week()
+    {
+        // Given
+        $workScheduleBuilder = new WorkScheduleBuilder();
+
+        // When
+        $workSchedule = $workScheduleBuilder
+            ->addRegularWorkWeek()
+            ->build();
+
+        // Then
+        $workWeek = CreateWorkWeek::regular();
+
+        self::assertEquals($workWeek, $workSchedule->workWeek());
     }
 }

@@ -3,6 +3,7 @@
 namespace Fmeccanici\Dlvr\Builders;
 
 use Carbon\CarbonImmutable;
+use Fmeccanici\Dlvr\DayOfWeek;
 use Fmeccanici\Dlvr\WorkDays\RegularWorkDay;
 use Fmeccanici\Dlvr\WorkDays\Time;
 use Fmeccanici\Dlvr\WorkDays\WorkHours;
@@ -44,5 +45,15 @@ class WorkScheduleBuilder implements WorkScheduleBuilderInterface
     public function build(): WorkSchedule
     {
         return $this->workSchedule;
+    }
+
+    public function addRegularWorkWeek(): WorkScheduleBuilder
+    {
+        $this->addRegularWorkDay(DayOfWeek::MONDAY, 9, 0, 17, 0);
+        $this->addRegularWorkDay(DayOfWeek::TUESDAY, 9, 0, 17, 0);
+        $this->addRegularWorkDay(DayOfWeek::WEDNESDAY, 9, 0, 17, 0);
+        $this->addRegularWorkDay(DayOfWeek::THURSDAY, 9, 0, 17, 0);
+        $this->addRegularWorkDay(DayOfWeek::FRIDAY, 9, 0, 17, 0);
+        return $this;
     }
 }

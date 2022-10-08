@@ -35,6 +35,15 @@ class WorkSchedule
             return $irregularWorkDay;
         }
 
+        $holiday = $this->holidays->first(function (CarbonImmutable $holiday) use ($dateTime) {
+            return $holiday->isSameDay($dateTime);
+        });
+
+        if ($holiday !== null)
+        {
+            return null;
+        }
+
         return $this->workWeek->workDayAt($dayOfWeek);
     }
 
@@ -60,21 +69,104 @@ class WorkSchedule
 
     public function dueDate(CarbonImmutable $startDate, int $workDays): CarbonImmutable
     {
-        $dueDate = clone $startDate;
-
-        for ($i = 0; $i < $workDays; $i++)
-        {
-            $dueDate = $dueDate->addDay();
-        }
-
-        $workDay = $this->workWeek->workDayAt($dueDate->dayOfWeek);
-
-        return $dueDate->setHour($workDay->startOfDay()->hours())
-                ->setMinute($workDay->startOfDay()->minutes());
+        return $this->nextNthWorkDay($startDate, $workDays);
     }
 
-    protected function nextWorkDay(CarbonImmutable $date): WorkDay
+    protected function beforeWorkHours(CarbonImmutable $dateTime): bool
     {
+        $workDay = $this->workDay($dateTime->year, $dateTime->month, $dateTime->day);
 
+        if ($workDay === null)
+        {
+            // TODO: Throw exception
+        }
+
+        return $workDay->workHours()->before(new Time($dateTime->hour, $dateTime->minute));
+    }
+
+    protected function afterWorkHours(CarbonImmutable $dateTime): bool
+    {
+        $workDay = $this->workDay($dateTime->year, $dateTime->month, $dateTime->day);
+
+        if ($workDay === null)
+        {
+            // TODO: Throw exception
+        }
+
+        return $workDay->workHours()->after(new Time($dateTime->hour, $dateTime->minute));
+    }
+
+    protected function working(CarbonImmutable $dateTime): bool
+    {
+        $workDay = $this->workDay($dateTime->year, $dateTime->month, $dateTime->day);
+
+        if ($workDay === null)
+        {
+            return false;
+        }
+
+        return ! $workDay->workHours()->outside(new Time($dateTime->hour, $dateTime->minute));
+    }
+
+    public function duringWorkHours(CarbonImmutable $dateTime): bool
+    {
+        $workDay = $this->workDay($dateTime->year, $dateTime->minute, $dateTime->day);
+
+        if ($workDay === null)
+        {
+            return false;
+        }
+
+        return ! $workDay->workHours()->inside(new Time($dateTime->hour, $dateTime->minute));
+    }
+
+    protected function nextNthWorkDay(CarbonImmutable $start, int $n): CarbonImmutable
+    {
+        $nextNthWorkDay = clone $start;
+        $temp = clone $start;
+
+        if (! $this->workDay($start->year, $start->month, $start->day))
+        {
+            $temp = $this->nextWorkDay($nextNthWorkDay);
+        } else if ($this->afterWorkHours($start))
+        {
+            $temp = $this->nextWorkDay($nextNthWorkDay);
+        }
+
+        for ($i = 0; $i < $n; $i++)
+        {
+            $nextNthWorkDay = $this->nextWorkDay($temp);
+            $temp = clone $nextNthWorkDay;
+        }
+
+        return $nextNthWorkDay;
+    }
+
+    protected function nextWorkDay(CarbonImmutable $start): CarbonImmutable
+    {
+        $nextWorkDay = clone $start;
+
+//        if ($this->afterWorkHours($start))
+//        {
+//            $nextWorkDay = $nextWorkDay->addDay();
+//        }
+
+
+        if ($this->working($nextWorkDay))
+        {
+            $nextWorkDay = $nextWorkDay->addDay();
+        }
+
+        while (! $this->workDay($nextWorkDay->year, $nextWorkDay->month, $nextWorkDay->day))
+        {
+            $nextWorkDay = $nextWorkDay->addDay();
+        }
+
+        $workDay = $this->workDay($nextWorkDay->year, $nextWorkDay->month, $nextWorkDay->day);
+
+        return $nextWorkDay
+            ->startOfDay()
+            ->setHour($workDay->workHours()->from()->hours())
+            ->setMinute($workDay->workHours()->from()->minutes());
     }
 }

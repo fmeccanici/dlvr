@@ -2,12 +2,14 @@
 
 namespace Fmeccanici\Dlvr;
 
+use Carbon\CarbonImmutable;
+
 class CreateWorkDay
 {
     public static function monday(int $fromHours = 9, int $fromMinutes = 0,
                                   int $toHours = 17, int $toMinutes = 0): WorkDay
     {
-        return new WorkDay(DayOfWeek::MONDAY,
+        return new RegularWorkDay(DayOfWeek::MONDAY,
             new WorkHours(new Time($fromHours, $fromMinutes),
             new Time($toHours, $toMinutes)));
     }
@@ -15,7 +17,7 @@ class CreateWorkDay
     public static function tuesday(int $fromHours = 9, int $fromMinutes = 0,
                                   int $toHours = 17, int $toMinutes = 0): WorkDay
     {
-        return new WorkDay(DayOfWeek::TUESDAY,
+        return new RegularWorkDay(DayOfWeek::TUESDAY,
             new WorkHours(new Time($fromHours, $fromMinutes),
                 new Time($toHours, $toMinutes)));
     }
@@ -23,7 +25,7 @@ class CreateWorkDay
     public static function wednesday(int $fromHours = 9, int $fromMinutes = 0,
                                   int $toHours = 17, int $toMinutes = 0): WorkDay
     {
-        return new WorkDay(DayOfWeek::WEDNESDAY,
+        return new RegularWorkDay(DayOfWeek::WEDNESDAY,
             new WorkHours(new Time($fromHours, $fromMinutes),
                 new Time($toHours, $toMinutes)));
     }
@@ -31,7 +33,7 @@ class CreateWorkDay
     public static function thursday(int $fromHours = 9, int $fromMinutes = 0,
                                     int $toHours = 17, int $toMinutes = 0): WorkDay
     {
-        return new WorkDay(DayOfWeek::THURSDAY,
+        return new RegularWorkDay(DayOfWeek::THURSDAY,
             new WorkHours(new Time($fromHours, $fromMinutes),
                 new Time($toHours, $toMinutes)));
     }
@@ -39,7 +41,7 @@ class CreateWorkDay
     public static function friday(int $fromHours = 9, int $fromMinutes = 0,
                                     int $toHours = 17, int $toMinutes = 0): WorkDay
     {
-        return new WorkDay(DayOfWeek::FRIDAY,
+        return new RegularWorkDay(DayOfWeek::FRIDAY,
             new WorkHours(new Time($fromHours, $fromMinutes),
                 new Time($toHours, $toMinutes)));
     }
@@ -47,7 +49,7 @@ class CreateWorkDay
     public static function saturday(int $fromHours = 9, int $fromMinutes = 0,
                                     int $toHours = 17, int $toMinutes = 0): WorkDay
     {
-        return new WorkDay(DayOfWeek::SATURDAY,
+        return new RegularWorkDay(DayOfWeek::SATURDAY,
             new WorkHours(new Time($fromHours, $fromMinutes),
                 new Time($toHours, $toMinutes)));
     }
@@ -55,7 +57,15 @@ class CreateWorkDay
     public static function sunday(int $fromHours = 9, int $fromMinutes = 0,
                                     int $toHours = 17, int $toMinutes = 0): WorkDay
     {
-        return new WorkDay(DayOfWeek::SUNDAY,
+        return new RegularWorkDay(DayOfWeek::SUNDAY,
+            new WorkHours(new Time($fromHours, $fromMinutes),
+                new Time($toHours, $toMinutes)));
+    }
+
+    public static function irregular(CarbonImmutable $date, int $fromHours = 9, int $fromMinutes = 0,
+                                            int $toHours = 17, int $toMinutes = 0): IrregularWorkDay
+    {
+        return new IrregularWorkDay($date,
             new WorkHours(new Time($fromHours, $fromMinutes),
                 new Time($toHours, $toMinutes)));
     }

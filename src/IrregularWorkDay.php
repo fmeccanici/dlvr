@@ -4,7 +4,7 @@ namespace Fmeccanici\Dlvr;
 
 use Carbon\CarbonImmutable;
 
-class IrregularWorkDay
+class IrregularWorkDay extends WorkDay
 {
     protected CarbonImmutable $date;
     protected WorkHours $workHours;
@@ -16,7 +16,7 @@ class IrregularWorkDay
     public function __construct(CarbonImmutable $date, WorkHours $workHours)
     {
         $this->date = $date;
-        $this->workHours = $workHours;
+        parent::__construct($workHours);
     }
 
     public function date(): CarbonImmutable
@@ -29,4 +29,8 @@ class IrregularWorkDay
         return $this->workHours;
     }
 
+    function dayOfWeek(): int
+    {
+        return $this->date->dayOfWeek;
+    }
 }

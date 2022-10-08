@@ -15,7 +15,7 @@ class WorkScheduleBuilder implements WorkScheduleBuilderInterface
 
     public function addRegularWorkDay(int $dayOfWeek, int $startHour, int $startMinute, int $endHour, int $endMinute): WorkScheduleBuilder
     {
-        $workDay = new WorkDay($dayOfWeek, new WorkHours(new Time($startHour, $startMinute), new Time($endHour, $endMinute)));
+        $workDay = new RegularWorkDay($dayOfWeek, new WorkHours(new Time($startHour, $startMinute), new Time($endHour, $endMinute)));
         $this->workSchedule->workWeek()->setWorkDay($workDay);
         return $this;
     }

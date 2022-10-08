@@ -13,5 +13,5 @@ $leadTimeInWorkDays = 6;
 $now = CarbonImmutable::now()->next(CarbonInterface::MONDAY)->setHour(10)->setMinute(0);
 $dueDate = $workSchedule->deliveryDate($now, 6);
 
-// Due date nest Tuesday
+// Delivery date next Tuesday
 var_dump($dueDate->toDateTimeString());

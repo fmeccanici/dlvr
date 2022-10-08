@@ -68,7 +68,7 @@ class WorkScheduleTest extends TestCase
         $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(10)->setMinute(0);
 
         // When
-        $dueDate = $workSchedule->dueDate($startDate, 1);
+        $dueDate = $workSchedule->deliveryDate($startDate, 1);
 
         // Then
         self::assertEquals($startDate->addDay()->startOfDay(), $dueDate->startOfDay());
@@ -85,7 +85,7 @@ class WorkScheduleTest extends TestCase
         $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(10)->setMinute(0);
 
         // When
-        $dueDate = $workSchedule->dueDate($startDate, 6);
+        $dueDate = $workSchedule->deliveryDate($startDate, 6);
 
         // Then
         self::assertEquals($startDate->addDays(8)->startOfDay(), $dueDate->startOfDay());
@@ -102,7 +102,7 @@ class WorkScheduleTest extends TestCase
         $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(16)->setMinute(0);
 
         // When
-        $dueDate = $workSchedule->dueDate($startDate, 2);
+        $dueDate = $workSchedule->deliveryDate($startDate, 2);
 
         // Then
         self::assertEquals($startDate->addDays(2)->startOfDay(), $dueDate->startOfDay());
@@ -119,7 +119,7 @@ class WorkScheduleTest extends TestCase
         $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(17)->setMinute(1);
 
         // When
-        $dueDate = $workSchedule->dueDate($startDate, 2);
+        $dueDate = $workSchedule->deliveryDate($startDate, 2);
 
         // Then
         self::assertEquals($startDate->addDays(3)->startOfDay(), $dueDate->startOfDay());
@@ -136,7 +136,7 @@ class WorkScheduleTest extends TestCase
         $startDate = CarbonImmutable::now()->next($dayOfWeek)->setHour(8)->setMinute(0);
 
         // When
-        $dueDate = $workSchedule->dueDate($startDate, 2);
+        $dueDate = $workSchedule->deliveryDate($startDate, 2);
 
         // Then
         self::assertEquals($startDate->addDays(2)->startOfDay(), $dueDate->startOfDay());
@@ -155,7 +155,7 @@ class WorkScheduleTest extends TestCase
         $workSchedule->addIrregularWorkDay($irregularWorkDay->workHours(), $irregularWorkDay->date());
 
         // When
-        $dueDate = $workSchedule->dueDate($startDate, 2);
+        $dueDate = $workSchedule->deliveryDate($startDate, 2);
 
         // Then
         self::assertEquals($startDate->addDays(3)->startOfDay(), $dueDate->startOfDay());
@@ -173,7 +173,7 @@ class WorkScheduleTest extends TestCase
         $workSchedule->addHoliday(CarbonImmutable::now()->next(CarbonImmutable::MONDAY));
 
         // When
-        $dueDate = $workSchedule->dueDate($startDate, 2);
+        $dueDate = $workSchedule->deliveryDate($startDate, 2);
 
         // Then
         self::assertEquals($startDate->addDays(3)->startOfDay(), $dueDate->startOfDay());
@@ -193,7 +193,7 @@ class WorkScheduleTest extends TestCase
         $workSchedule->addHoliday(CarbonImmutable::now()->next(CarbonImmutable::TUESDAY));
 
         // When
-        $dueDate = $workSchedule->dueDate($startDate, 2);
+        $dueDate = $workSchedule->deliveryDate($startDate, 2);
 
         // Then
         self::assertEquals($startDate->addDays(4)->startOfDay(), $dueDate->startOfDay());

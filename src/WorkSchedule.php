@@ -71,7 +71,7 @@ class WorkSchedule
         })->first();
     }
 
-    public function dueDate(CarbonImmutable $startDate, int $workDays): CarbonImmutable
+    public function deliveryDate(CarbonImmutable $startDate, int $workDays): CarbonImmutable
     {
         return $this->nextNthWorkDay($startDate, $workDays);
     }

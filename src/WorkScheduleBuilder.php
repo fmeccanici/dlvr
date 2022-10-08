@@ -33,7 +33,6 @@ class WorkScheduleBuilder implements WorkScheduleBuilderInterface
         $this->workSchedule->addIrregularWorkDay($workHours, $date);
 
         return $this;
-
     }
 
     public function build(): WorkSchedule

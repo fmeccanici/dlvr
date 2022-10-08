@@ -3,6 +3,7 @@
 namespace Fmeccanici\Dlvr;
 
 use Carbon\CarbonImmutable;
+use Fmeccanici\Dlvr\Exceptions\WorkScheduleOperationException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
@@ -72,25 +73,31 @@ class WorkSchedule
         return $this->nextNthWorkDay($startDate, $workDays);
     }
 
-    protected function beforeWorkHours(CarbonImmutable $dateTime): bool
+    /**
+     * @throws WorkScheduleOperationException
+     */
+    public function beforeWorkHours(CarbonImmutable $dateTime): bool
     {
         $workDay = $this->workDay($dateTime->year, $dateTime->month, $dateTime->day);
 
         if ($workDay === null)
         {
-            // TODO: Throw exception
+            throw new WorkScheduleOperationException(sprintf("Cannot determine before work hours: %s is not a workday", $dateTime->toDateTimeString()));
         }
 
         return $workDay->workHours()->before(new Time($dateTime->hour, $dateTime->minute));
     }
 
-    protected function afterWorkHours(CarbonImmutable $dateTime): bool
+    /**
+     * @throws WorkScheduleOperationException
+     */
+    public function afterWorkHours(CarbonImmutable $dateTime): bool
     {
         $workDay = $this->workDay($dateTime->year, $dateTime->month, $dateTime->day);
 
         if ($workDay === null)
         {
-            // TODO: Throw exception
+            throw new WorkScheduleOperationException(sprintf("Cannot determine after work hours: %s is not a workday", $dateTime->toDateTimeString()));
         }
 
         return $workDay->workHours()->after(new Time($dateTime->hour, $dateTime->minute));

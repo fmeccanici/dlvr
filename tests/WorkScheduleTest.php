@@ -5,6 +5,7 @@ use Fmeccanici\Dlvr\CreateWorkDay;
 use Fmeccanici\Dlvr\CreateWorkSchedule;
 use Fmeccanici\Dlvr\CreateWorkWeek;
 use Fmeccanici\Dlvr\DayOfWeek;
+use Fmeccanici\Dlvr\Exceptions\WorkScheduleOperationException;
 use Fmeccanici\Dlvr\RegularWorkDay;
 use Fmeccanici\Dlvr\SupplyChain;
 use Fmeccanici\Dlvr\Time;
@@ -182,5 +183,36 @@ class WorkScheduleTest extends TestCase
         self::assertEquals($startDate->addDays(4)->startOfDay(), $dueDate->startOfDay());
         self::assertEquals(9, $dueDate->hour);
         self::assertEquals(0, $dueDate->minute);
+    }
+    
+    /** @test */
+    public function it_should_throw_exception_when_after_work_hours_called_on_non_work_day()
+    {
+        // Given
+        $date = CarbonImmutable::now()->nextWeekendDay();
+        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+
+        // Then
+        $this->expectException(WorkScheduleOperationException::class);
+        $this->expectErrorMessage(sprintf("Cannot determine after work hours: %s is not a workday", $date->toDateTimeString()));
+
+        // When
+        $workSchedule->afterWorkHours($date);
+    }
+
+    /** @test */
+    public function it_should_throw_exception_when_before_work_hours_called_on_non_work_day()
+    {
+        // Given
+        $date = CarbonImmutable::now()->nextWeekendDay();
+        $workSchedule = SupplyChain::createRegularWorkSchedule($this->workScheduleBuilder);
+
+        // Then
+        $this->expectException(WorkScheduleOperationException::class);
+        $this->expectErrorMessage(sprintf("Cannot determine before work hours: %s is not a workday", $date->toDateTimeString()));
+
+        // When
+        $workSchedule->beforeWorkHours($date);
+
     }
 }

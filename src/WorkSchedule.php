@@ -4,7 +4,10 @@ namespace Fmeccanici\Dlvr;
 
 use Carbon\CarbonImmutable;
 use Fmeccanici\Dlvr\Exceptions\WorkScheduleOperationException;
-use Illuminate\Support\Arr;
+use Fmeccanici\Dlvr\WorkDays\IrregularWorkDay;
+use Fmeccanici\Dlvr\WorkDays\Time;
+use Fmeccanici\Dlvr\WorkDays\WorkDay;
+use Fmeccanici\Dlvr\WorkDays\WorkHours;
 use Illuminate\Support\Collection;
 
 class WorkSchedule

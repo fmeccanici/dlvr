@@ -1,13 +1,9 @@
 <?php
 
-use Fmeccanici\Dlvr\CreateWorkDay;
-use Fmeccanici\Dlvr\CreateWorkWeek;
 use Fmeccanici\Dlvr\DayOfWeek;
 use Fmeccanici\Dlvr\Exceptions\InvalidDayOfWeekException;
-use Fmeccanici\Dlvr\Time;
-use Fmeccanici\Dlvr\WorkDay;
-use Fmeccanici\Dlvr\WorkHours;
-use Fmeccanici\Dlvr\WorkSchedule;
+use Fmeccanici\Dlvr\Factories\CreateWorkDay;
+use Fmeccanici\Dlvr\Factories\CreateWorkWeek;
 use PHPUnit\Framework\TestCase;
 
 class WorkWeekTest extends TestCase

@@ -2,6 +2,8 @@
 
 namespace Fmeccanici\Dlvr;
 
+use Fmeccanici\Dlvr\Builders\WorkScheduleBuilderInterface;
+
 class SupplyChain
 {
     public static function createRegularWorkSchedule(WorkScheduleBuilderInterface $workScheduleBuilder): WorkSchedule

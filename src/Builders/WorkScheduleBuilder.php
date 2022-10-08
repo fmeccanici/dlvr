@@ -1,8 +1,13 @@
 <?php
 
-namespace Fmeccanici\Dlvr;
+namespace Fmeccanici\Dlvr\Builders;
 
 use Carbon\CarbonImmutable;
+use Fmeccanici\Dlvr\WorkDays\RegularWorkDay;
+use Fmeccanici\Dlvr\WorkDays\Time;
+use Fmeccanici\Dlvr\WorkDays\WorkHours;
+use Fmeccanici\Dlvr\WorkSchedule;
+use Fmeccanici\Dlvr\WorkWeek;
 
 class WorkScheduleBuilder implements WorkScheduleBuilderInterface
 {
@@ -33,6 +38,7 @@ class WorkScheduleBuilder implements WorkScheduleBuilderInterface
         $this->workSchedule->addIrregularWorkDay($workHours, $date);
 
         return $this;
+
     }
 
     public function build(): WorkSchedule

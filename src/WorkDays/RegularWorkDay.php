@@ -1,17 +1,25 @@
 <?php
 
-namespace Fmeccanici\Dlvr;
+namespace Fmeccanici\Dlvr\WorkDays;
 
-abstract class WorkDay
+class RegularWorkDay extends WorkDay
 {
+    protected int $dayOfWeek;
     protected WorkHours $workHours;
 
     /**
+     * @param int $dayOfWeek
      * @param WorkHours $workHours
      */
-    public function __construct(WorkHours $workHours)
+    public function __construct(int $dayOfWeek, WorkHours $workHours)
     {
+        $this->dayOfWeek = $dayOfWeek;
         $this->workHours = $workHours;
+    }
+
+    public function dayOfWeek(): int
+    {
+        return $this->dayOfWeek;
     }
 
     public function workHours(): WorkHours
@@ -28,7 +36,4 @@ abstract class WorkDay
     {
         return $this->workHours->to();
     }
-
-    abstract function dayOfWeek(): int;
-
 }

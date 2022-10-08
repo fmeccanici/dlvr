@@ -3,6 +3,7 @@
 namespace Fmeccanici\Dlvr;
 
 use Fmeccanici\Dlvr\Exceptions\InvalidDayOfWeekException;
+use Fmeccanici\Dlvr\WorkDays\WorkDay;
 
 class WorkWeek
 {

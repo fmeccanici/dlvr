@@ -1,11 +1,11 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Fmeccanici\Dlvr\CreateWorkDay;
+use Fmeccanici\Dlvr\Builders\WorkScheduleBuilder;
 use Fmeccanici\Dlvr\DayOfWeek;
-use Fmeccanici\Dlvr\Time;
-use Fmeccanici\Dlvr\WorkHours;
-use Fmeccanici\Dlvr\WorkScheduleBuilder;
+use Fmeccanici\Dlvr\Factories\CreateWorkDay;
+use Fmeccanici\Dlvr\WorkDays\Time;
+use Fmeccanici\Dlvr\WorkDays\WorkHours;
 use PHPUnit\Framework\TestCase;
 
 class WorkScheduleBuilderTest extends TestCase

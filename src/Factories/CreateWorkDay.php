@@ -1,8 +1,14 @@
 <?php
 
-namespace Fmeccanici\Dlvr;
+namespace Fmeccanici\Dlvr\Factories;
 
 use Carbon\CarbonImmutable;
+use Fmeccanici\Dlvr\DayOfWeek;
+use Fmeccanici\Dlvr\WorkDays\IrregularWorkDay;
+use Fmeccanici\Dlvr\WorkDays\RegularWorkDay;
+use Fmeccanici\Dlvr\WorkDays\Time;
+use Fmeccanici\Dlvr\WorkDays\WorkDay;
+use Fmeccanici\Dlvr\WorkDays\WorkHours;
 
 class CreateWorkDay
 {

@@ -1,8 +1,9 @@
 <?php
 
-namespace Fmeccanici\Dlvr;
+namespace Fmeccanici\Dlvr\Builders;
 
 use Carbon\CarbonImmutable;
+use Fmeccanici\Dlvr\WorkSchedule;
 
 interface WorkScheduleBuilderInterface
 {

@@ -1,6 +1,12 @@
 <?php
 
-namespace Fmeccanici\Dlvr;
+namespace Fmeccanici\Dlvr\Factories;
+
+use Fmeccanici\Dlvr\DayOfWeek;
+use Fmeccanici\Dlvr\WorkDays\RegularWorkDay;
+use Fmeccanici\Dlvr\WorkDays\Time;
+use Fmeccanici\Dlvr\WorkDays\WorkHours;
+use Fmeccanici\Dlvr\WorkWeek;
 
 class CreateWorkWeek
 {

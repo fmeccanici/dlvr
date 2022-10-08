@@ -1,6 +1,6 @@
 <?php
 
-namespace Fmeccanici\Dlvr;
+namespace Fmeccanici\Dlvr\WorkDays;
 
 use Carbon\CarbonImmutable;
 

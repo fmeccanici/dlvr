@@ -1,6 +1,6 @@
 <?php
 
-use Fmeccanici\Dlvr\Time;
+use Fmeccanici\Dlvr\WorkDays\Time;
 use PHPUnit\Framework\TestCase;
 
 class TimeTest extends TestCase

@@ -7,7 +7,10 @@ use Carbon\CarbonInterface;
 use Fmeccanici\Dlvr\Builders\WorkScheduleBuilder;
 
 $workScheduleBuilder = new WorkScheduleBuilder();
-$workSchedule = $workScheduleBuilder->addRegularWorkWeek()->build();
+$workSchedule = $workScheduleBuilder
+    ->addRegularWorkWeek()
+    ->addDeviatingWorkHours(CarbonImmutable::now()->next(CarbonImmutable::MONDAY), 9, 0, 12, 0)
+    ->build();
 
 $leadTimeInWorkDays = 6;
 $now = CarbonImmutable::now()->next(CarbonInterface::MONDAY)->setHour(10)->setMinute(0);

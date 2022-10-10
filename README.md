@@ -52,7 +52,7 @@ var_dump($dueDate->toDateTimeString());
 ```
 
 ### Holidays
-```injectablephp
+```phpt
 <?php
 
 require(__DIR__.'/../vendor/autoload.php');
@@ -70,5 +70,5 @@ $now = CarbonImmutable::now()->next(CarbonInterface::MONDAY)->setHour(10)->setMi
 $dueDate = $workSchedule->deliveryDate($now, 6);
 
 // Delivery date next Wednesday
-var_du
+var_dump($dueDate->toDateTimeString());
 ```

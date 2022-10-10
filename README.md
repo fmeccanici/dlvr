@@ -7,7 +7,7 @@ This package lets you determine the delivery date based on a work schedule, give
 ```
 ## Examples
 ### Regular workweek
-```injectablephp
+```php
 <?php
 
 require(__DIR__.'/../vendor/autoload.php');
@@ -28,7 +28,7 @@ var_dump($dueDate->toDateTimeString());
 ```
 
 ### Irregular workdays
-```injectablephp
+```php
 <?php
 
 require(__DIR__.'/../vendor/autoload.php');
@@ -52,7 +52,7 @@ var_dump($dueDate->toDateTimeString());
 ```
 
 ### Holidays
-```injectablephp
+```php
 <?php
 
 require(__DIR__.'/../vendor/autoload.php');

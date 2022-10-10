@@ -14,5 +14,6 @@
     "require": {
         "illuminate/collections": "^9.33",
         "nesbot/carbon": "^2.62"
-    }
+    },
+    "licence" : "MIT"
 }

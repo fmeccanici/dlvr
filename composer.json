@@ -15,5 +15,6 @@
         "illuminate/collections": "^9.33",
         "nesbot/carbon": "^2.62"
     },
-    "licence" : "MIT"
+    "licence" : "MIT",
+    "version" : "v1.0.0"
 }

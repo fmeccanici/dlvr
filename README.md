@@ -52,7 +52,7 @@ var_dump($dueDate->toDateTimeString());
 ```
 
 ### Holidays
-```phpt
+```injectablephp
 <?php
 
 require(__DIR__.'/../vendor/autoload.php');
